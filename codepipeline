@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Siddhesh9022/pipeline.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Compile the Java code using Windows batch command
+                bat 'javac Main.java'
+            }
+        }
+
+        stage('Test and Run') {
+            steps {
+                // Run your Java program using Windows batch command
+                bat 'java Main'
+            }
+        }
+   }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+ }
+}
